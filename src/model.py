@@ -18,8 +18,14 @@ class Model():
     def handle_inputs(self, inputs: Inputs) -> None:
         if inputs.quit:
             self.running = False
-        if inputs.skill:
-            print(f"TODO: add '{inputs.skill}' to Skills")
+        if inputs.pl:
+            print(f"TODO: add '{inputs.pl}' to Proficient Languages")
+        if inputs.fl:
+            print(f"TODO: add '{inputs.fl}' to Familiar Languages")
+        if inputs.t:
+            print(f"TODO: add '{inputs.t}' to Technologies")
+        if inputs.c:
+            print(f"TODO: add '{inputs.c}' to Coursework")
         if inputs.project:
             print(f"TODO: add '{inputs.project}' to Projects")
 

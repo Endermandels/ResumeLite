@@ -18,7 +18,10 @@ class TerminalView(View):
         self.HELP_MSG = "--- Commands ---\n" \
                         "q: quit\n" \
                         "h: help\n" \
-                        "s <skill>: enter skill"
+                        "pl <languages>: enter proficient languages separated by commas\n" \
+                        "fl <languages>: enter familiar languages separated by commas\n" \
+                        "t <technologies>: enter technologies separated by commas\n" \
+                        "c <coursework>: enter coursework separated by commas"
     
     def show_help(self) -> None:
         """

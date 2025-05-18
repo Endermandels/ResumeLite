@@ -1,10 +1,13 @@
 from typing import NamedTuple
 
 class Inputs(NamedTuple):
-    quit: bool = False      # Quit the program if true
-    help: bool = False      # Display help info if true
-    skill: str = ''         # Skill to enter
-    project: dict = None    # Project to enter (name, organizer, points)
+    quit: bool = False          # Quit the program if true
+    help: bool = False          # Display help info if true
+    pl: list[str] = None        # Proficient languages to enter
+    fl: list[str] = None        # Familiar languages to enter
+    t: list[str] = None         # Technologies to enter
+    c: list[str] = None         # Coursework to enter
+    project: dict = None        # Project to enter (name, organizer, points)
 
 class Controller():
     def __init__(self) -> None:
@@ -35,20 +38,25 @@ class TerminalController(Controller):
         if uin.lower() == 'q' or uin.lower() == 'quit':
             # Quit
             return Inputs(quit=True)
-        if uin.lower().startswith('s|'):
-            # Skill
-            return Inputs(skill=uin[2:].strip())
-        if uin.lower().startswith('p|'):
-            # Project
-            details = uin.split('|')[1:]
-            if len(details) < 3:
-                print('Need name, project organizer, and descriptive points, split by \'|\'') 
-                return Inputs()
-            project = {
-                'name': details[0],
-                'organizer': details[1],
-                'points': details[2:]
-            }
-            return Inputs(project=project)
+        if uin.lower().startswith('pl '):
+            # Proficient Languages
+            pl = list(map(str.strip, uin[2:].split(',')))
+            return Inputs(pl=pl)
+        if uin.lower().startswith('fl '):
+            # Familiar Languages
+            fl = list(map(str.strip, uin[2:].split(',')))
+            return Inputs(fl=fl)
+        if uin.lower().startswith('t '):
+            # Technologies
+            t = list(map(str.strip, uin[2:].split(',')))
+            return Inputs(t=t)
+        if uin.lower().startswith('c '):
+            # Coursework
+            c = list(map(str.strip, uin[2:].split(',')))
+            return Inputs(c=c)
+        # if uin.lower().startswith('p|'):
+        #     # Project
+        #     # TODO: Read files/project.json and add those project settings
+        #     return Inputs(project=project)
         print(f"unknown command: {uin}")
         return Inputs(help=True)
