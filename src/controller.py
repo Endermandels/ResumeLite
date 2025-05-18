@@ -1,13 +1,15 @@
 from typing import NamedTuple
+import json
 
 class Inputs(NamedTuple):
     quit: bool = False          # Quit the program if true
     help: bool = False          # Display help info if true
     pl: list[str] = None        # Proficient languages to enter
     fl: list[str] = None        # Familiar languages to enter
-    t: list[str] = None         # Technologies to enter
-    c: list[str] = None         # Coursework to enter
-    project: dict = None        # Project to enter (name, organizer, points)
+    tech: list[str] = None      # Technologies to enter
+    course: list[str] = None    # Coursework to enter
+    project: dict = None        # Project to enter
+    experience: dict = None     # Experience to enter
 
 class Controller():
     def __init__(self) -> None:
@@ -38,6 +40,16 @@ class TerminalController(Controller):
         if uin.lower() == 'q' or uin.lower() == 'quit':
             # Quit
             return Inputs(quit=True)
+        if uin.lower() == 'p' or uin.lower() == 'project':
+            # Project
+            with open('files/project.json', "r") as file:
+                project = json.load(file)
+            return Inputs(project=project)
+        if uin.lower() == 'e' or uin.lower() == 'experience':
+            # Experience
+            with open('files/experience.json', "r") as file:
+                experience = json.load(file)
+            return Inputs(experience=experience)
         if uin.lower().startswith('pl '):
             # Proficient Languages
             pl = list(map(str.strip, uin[2:].split(',')))
@@ -48,15 +60,11 @@ class TerminalController(Controller):
             return Inputs(fl=fl)
         if uin.lower().startswith('t '):
             # Technologies
-            t = list(map(str.strip, uin[2:].split(',')))
-            return Inputs(t=t)
+            tech = list(map(str.strip, uin[2:].split(',')))
+            return Inputs(tech=tech)
         if uin.lower().startswith('c '):
             # Coursework
-            c = list(map(str.strip, uin[2:].split(',')))
-            return Inputs(c=c)
-        # if uin.lower().startswith('p|'):
-        #     # Project
-        #     # TODO: Read files/project.json and add those project settings
-        #     return Inputs(project=project)
+            course = list(map(str.strip, uin[2:].split(',')))
+            return Inputs(course=course)
         print(f"unknown command: {uin}")
         return Inputs(help=True)

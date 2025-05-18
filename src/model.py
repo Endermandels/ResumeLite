@@ -18,16 +18,20 @@ class Model():
     def handle_inputs(self, inputs: Inputs) -> None:
         if inputs.quit:
             self.running = False
+        if inputs.help:
+            self.vw.show_help()
         if inputs.pl:
             print(f"TODO: add '{inputs.pl}' to Proficient Languages")
         if inputs.fl:
             print(f"TODO: add '{inputs.fl}' to Familiar Languages")
-        if inputs.t:
-            print(f"TODO: add '{inputs.t}' to Technologies")
-        if inputs.c:
-            print(f"TODO: add '{inputs.c}' to Coursework")
+        if inputs.tech:
+            print(f"TODO: add '{inputs.tech}' to Technologies")
+        if inputs.course:
+            print(f"TODO: add '{inputs.course}' to Coursework")
         if inputs.project:
             print(f"TODO: add '{inputs.project}' to Projects")
+        if inputs.experience:
+            print(f"TODO: add '{inputs.experience}' to Work Experience")
 
     def run(self) -> None:
         """
@@ -41,9 +45,4 @@ class Model():
 class TerminalModel(Model):
     def __init__(self, ct: TerminalController, vw: TerminalView) -> None:
         Model.__init__(self, ct, vw)
-    
-    def handle_inputs(self, inputs: Inputs):
-        super().handle_inputs(inputs)
-        if inputs.help:
-            self.vw.show_help()
     
