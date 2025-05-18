@@ -24,12 +24,12 @@ class TerminalView(View):
         self.HELP_MSG = "--- Commands ---\n" \
                         "q: quit\n" \
                         "h: help\n" \
-                        "p: save project from files/project.json\n" \
-                        "e: save experience from files/experience.json\n" \
+                        "pr: save project from files/project.json\n" \
+                        "ex: save experience from files/experience.json\n" \
+                        "ed: save education from files/education.json\n" \
                         "pl <languages>: enter proficient languages separated by commas\n" \
                         "fl <languages>: enter familiar languages separated by commas\n" \
-                        "t <technologies>: enter technologies separated by commas\n" \
-                        "c <coursework>: enter coursework separated by commas"
+                        "te <technologies>: enter technologies separated by commas"
     
     def show_help(self) -> None:
         self.buf += self.HELP_MSG

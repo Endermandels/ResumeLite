@@ -26,12 +26,12 @@ class Model():
             print(f"TODO: add '{inputs.fl}' to Familiar Languages")
         if inputs.tech:
             print(f"TODO: add '{inputs.tech}' to Technologies")
-        if inputs.course:
-            print(f"TODO: add '{inputs.course}' to Coursework")
         if inputs.project:
             print(f"TODO: add '{inputs.project}' to Projects")
         if inputs.experience:
             print(f"TODO: add '{inputs.experience}' to Work Experience")
+        if inputs.education:
+            print(f"TODO: add '{inputs.education}' to Education")
 
     def run(self) -> None:
         """

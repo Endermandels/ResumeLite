@@ -7,9 +7,9 @@ class Inputs(NamedTuple):
     pl: list[str] = None        # Proficient languages to enter
     fl: list[str] = None        # Familiar languages to enter
     tech: list[str] = None      # Technologies to enter
-    course: list[str] = None    # Coursework to enter
     project: dict = None        # Project to enter
     experience: dict = None     # Experience to enter
+    education: dict = None      # Education to enter
 
 class Controller():
     def __init__(self) -> None:
@@ -40,16 +40,20 @@ class TerminalController(Controller):
         if uin.lower() == 'q' or uin.lower() == 'quit':
             # Quit
             return Inputs(quit=True)
-        if uin.lower() == 'p' or uin.lower() == 'project':
+        if uin.lower() == 'pr' or uin.lower() == 'project':
             # Project
             with open('files/project.json', "r") as file:
                 project = json.load(file)
             return Inputs(project=project)
-        if uin.lower() == 'e' or uin.lower() == 'experience':
+        if uin.lower() == 'ex' or uin.lower() == 'experience':
             # Experience
             with open('files/experience.json', "r") as file:
                 experience = json.load(file)
-            return Inputs(experience=experience)
+        if uin.lower() == 'ed' or uin.lower() == 'education':
+            # Education
+            with open('files/education.json', "r") as file:
+                education = json.load(file)
+            return Inputs(education=education)
         if uin.lower().startswith('pl '):
             # Proficient Languages
             pl = list(map(str.strip, uin[2:].split(',')))
@@ -58,13 +62,9 @@ class TerminalController(Controller):
             # Familiar Languages
             fl = list(map(str.strip, uin[2:].split(',')))
             return Inputs(fl=fl)
-        if uin.lower().startswith('t '):
+        if uin.lower().startswith('te '):
             # Technologies
             tech = list(map(str.strip, uin[2:].split(',')))
             return Inputs(tech=tech)
-        if uin.lower().startswith('c '):
-            # Coursework
-            course = list(map(str.strip, uin[2:].split(',')))
-            return Inputs(course=course)
         print(f"unknown command: {uin}")
         return Inputs(help=True)
